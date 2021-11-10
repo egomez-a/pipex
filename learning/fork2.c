@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 09:55:13 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/05 10:12:37 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:11:02 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 
-// este programa es para crear 5 hijos
-// el bucle for es para que el padre vaya creando hijos
+// Este programa es para crear 5 hijos
+// El bucle for es para que el padre vaya creando hijos
 #define NUM_CHILD 5
 
-
-/* Funcion para calcular un numero aleatorio. Semilla es srand, y el numero*/
-/* está entre 0 y 255 */
+/* Funcion que hará el hijo. Sirve por ejemplo para calcular un numero aleatorio. 
+/* Semilla es srand, y el numero está entre 0 y 255 */
 int	doSomething(void)
 {
 	int ret;
@@ -43,9 +42,11 @@ int main(void)
 		pidC = fork();
 		if (pidC > 0)
 			continue;
+			/*  continua haciendo hijos */
 		else if (pidC == 0)
 		{
 			exit(doSomething());
+			/* para que no haga hijos de hijos. doSomething devuelve un valor*/
 		}
 		else 
 		{
@@ -55,9 +56,14 @@ int main(void)
 	for(int i = 0; i < NUM_CHILD; i++)
 	{
 		pidC = wait(&status);
-		printf("Padre de PID = %d, Hijo de PID = %d terminado, st = %d\n", getpid(), pidC, WEXITSTATUS(status));
+		/* La funcion wait sera llamada por el proceso padre para esperar que un proceso hijo termine.   */
+		/* Como argumento de entrada tiene que tener un puntero a una variable status. En esta variable */
+		/* se almacenará información de estaod de este hijo que ha terminado, y dara como retorno un PID del */
+		/* hijo que ha terminado */
+		/* La variable se puede inspeccionar con la macro WEXITSTATUS   */
+		printf("Padre de PID = %d, Hijo de PID = %d terminado, estado = %d\n", getpid(), pidC, WEXITSTATUS(status));
 	}
-	while (1)
+	while (1)  /* bucle infinito   */
 	{
 		sleep(10);
 	}
