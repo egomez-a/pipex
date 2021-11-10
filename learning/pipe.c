@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 15:13:34 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/10 15:44:51 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/10 17:45:06 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // Va asociado a dos fd. Uno de escritura y otro de lectura
 
 // Funciones:   
-// crear pipe:  	int pipe (int fd[2]); *fd[0] : READ; fd[1]: WRITE 
+// crear pipe:  	int pipe (int fd[2]);     *fd[0]: READ; fd[1]: WRITE 
 // escribe: 		ssize_t write(int fd, const void *buf, size_t nr)  fd de escritura
 // lee:				ssize_t read(int fd, void *buf, size_t nr)   fd de lectura
 // cierra:			int close (int fd)   cualquier fd
