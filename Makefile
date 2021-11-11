@@ -6,13 +6,14 @@
 #    By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/10 14:37:38 by egomez-a          #+#    #+#              #
-#    Updated: 2021/11/11 11:52:51 by egomez-a         ###   ########.fr        #
+#    Updated: 2021/11/11 13:37:09 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= 	pipex
 SRCS_DIR	=	sources/
 OBJ_DIR		= 	obj/
+INC_DIR		= 	include/
 
 SRCS 		=	pipex.c \
 				ft_putendl_fd.c \
@@ -27,9 +28,9 @@ OBJS 		= 	$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
 CFLAGS 		= 	-Wall -Wextra -Werror
 DEBUGGING	= 	-g
-LFLAGS		= 	-I include/
+LFLAGS		= 	-I$(INC_DIR)
 CC 			= 	gcc
-RM 			= 	rm -rf
+RM 			= 	rm -rf			#-f es para evitar que borre si no hay nada que borrar
 NORM		= 	/usr/bin/norminette
 
 NONE		=	'\033[0m'
