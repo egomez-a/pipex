@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 19:35:57 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/10 19:38:50 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/11 11:44:31 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 /* Escribe la cadena de caracteres ’s’ sobre el descriptor de fichero 
 ** proporcionado, seguida de un salto de línea.
 */
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
 
 void	ft_putendl_fd(char *s, int fd)
 {

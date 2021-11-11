@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:17:27 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/10 17:18:36 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/11 11:47:37 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 ** NUL-terminating the result if dstsize is not 0.
 */
 
-unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	unsigned int	j;
-	unsigned int	lensrc;
+	size_t	j;
+	size_t	lensrc;
 
 	if (!src || !dest)
 		return (0);

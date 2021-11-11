@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:44:08 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/10 18:06:02 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/11 13:08:47 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@
 
 int main (void)
 {
-	int fd[2]; 			// file descriptors array
+	int fd[2]; 			// file descriptors array del pipe
 	char buf[100];		// buffer lectura
 	int	num;			// num bytes leidos pipe
 
 	pipe(fd);			// crea pipe. TODO: error handling
-
+	printf("El fd del proceso es %d\n", *fd);
 	switch(fork())		// crea nuevo proceso
 	{
-		case 0:			// hijo. El hijo va a escribir
+		case 0:			// hijo. El hijo va a escribir. por eso cierra extremo lectura
+			printf("El proceso hijo se está ejecutando");
 			close(fd[0]);		// cierra extremo lectura
 			write(fd[1], "abcde ...", 9);  // escribe en el pipe
 			write(fd[1], "fghij ...", 9);  // escribe en el pipe
@@ -42,7 +43,8 @@ int main (void)
 		case -1:		// error
 			break;
 		
-		default:		// padre
+		default:		// padre. va a leer
+			printf("El proceso padre se está ejecutando\n");
 			close(fd[1]);		// cierra extremo escritura
 			while(0 < (num = read(fd[0], buf, sizeof(buf)))) /* lee hasta que se vacia el pipe */
 			{
