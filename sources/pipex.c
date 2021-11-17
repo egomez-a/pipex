@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/11 12:31:41 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/17 14:14:15 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,32 @@ void 	start_child(int *fd, char **argv)
 //	close(fd[FD_WRITE_END]);				/* cierro el fd del pipe */
 }
 
-int main(int argc, char* argv[])//, char* env[])
+void	env_variable(char **envp)
+{
+	if (envp)
+	{
+		
+	}
+	else 
+		printf("Error - no env variable provided\n");
+}
+
+int main(int argc, char **argv, char **envp)
 {
     int		fd[2];
-//	int 	fd2;
-//	int		status;
+	int		status;
 	pid_t	pid;
+	t_pipex	pipe;
+
+// Busca que tengo la variable de entorno 
+// Busca que existe path
+// Separa con splits los distintos paths 
+// Añade un / 
+// comprueba que el nombre del command existe 
 
 	check_entry(argc);
+	pipe.fd_in = open_infile(argv[1]);
+	env_variable(envp);
 	pipe(fd);				/* comunica los dos comandos */
 	pid = fork();
 	if (pid == -1)
@@ -85,7 +103,7 @@ int main(int argc, char* argv[])//, char* env[])
 	 		close(fd[FD_READ_END]);      /* cerrar extremo no necesario */
 	 	}
 	}
-	// /* wait para cada hijo */
+	/* wait para cada hijo */
 	// wait(&status);
 	// wait(&status);
     return 0;

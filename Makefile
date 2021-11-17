@@ -6,7 +6,7 @@
 #    By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/10 14:37:38 by egomez-a          #+#    #+#              #
-#    Updated: 2021/11/11 13:37:09 by egomez-a         ###   ########.fr        #
+#    Updated: 2021/11/17 13:38:48 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,11 @@ OBJ_DIR		= 	obj/
 INC_DIR		= 	include/
 
 SRCS 		=	pipex.c \
-				ft_putendl_fd.c \
-				ft_split.c \
-				ft_putstr_fd.c \
-				ft_strlcpy.c \
-				ft_strlen.c
+				lib/ft_putendl_fd.c \
+				lib/ft_split.c \
+				lib/ft_putstr_fd.c \
+				lib/ft_strlcpy.c \
+				lib/ft_strlen.c
 
 NOW			=	$(shell date +"%d-%m-%y %H:%M")
 

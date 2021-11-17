@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/11 11:47:44 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/17 14:10:13 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,19 @@
 # include <unistd.h>		/* necesario para funcion dup2 */
 # include <stdio.h>			/* necesario para funcion perror */
 # include <sys/wait.h>		/* necesario para funcion wait */
-# include <errno.h>
-# include <sys/stat.h>
 # include <fcntl.h>
-# include <string.h>
 
 # define FD_READ_END    0    /* index pipe extremo lectura */
 # define FD_WRITE_END   1    /* index pipe extremo escritura */
+
+typedef struct s_pipex
+{
+	int		fd_in;
+	int		fd_out;
+	char	**cmd1;
+	char	**cmd2;
+	char	**path;
+}			t_pipex;
 
 /* Funciones útiles */
 char	**ft_split(const char *s, char c);
@@ -38,7 +44,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 /* Funciones pipex */
-int 	main(int argc, char* argv[]);//, char* env[]);
+int 	main(int argc, char **argv, char **env);
 void 	start_child(int *fd, char **argv);
 
 /* Funciones check */
