@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/17 14:14:15 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/17 15:47:15 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,21 @@ void 	start_child(int *fd, char **argv)
 
 void	env_variable(char **envp)
 {
+	int		i;
+	char	*path_line;
+	char	**paths;
+
+	i = 0;
 	if (envp)
 	{
+		while(envp[i])
+		{
+			paths = ft_strnstr(env[i], "PATH=", ft_strlen("PATH="));
+			if (paths != NULL)
+				break;
+			i++;
+		}
+		paths = ft_split(path_line, ':');
 		
 	}
 	else 
