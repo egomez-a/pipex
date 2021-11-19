@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/18 11:21:28 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/19 19:47:06 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ size_t	ft_strlcat(char *dest, char *src, size_t size);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strnstr(const char *hst, const char *ndl, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strtrim(char const *s1, char const *set);
+size_t	ft_begtrim(char const *s1, char const *set);
 
 /* Funciones pipex */
 int 	main(int argc, char **argv, char **env);

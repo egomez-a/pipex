@@ -6,7 +6,7 @@
 #    By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/10 14:37:38 by egomez-a          #+#    #+#              #
-#    Updated: 2021/11/18 11:25:04 by egomez-a         ###   ########.fr        #
+#    Updated: 2021/11/19 19:47:24 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ SRCS 		=	pipex.c \
 				ft_strlcat.c \
 				ft_strnstr.c \
 				ft_strncmp.c \
+				ft_strtrim.c \
+				ft_strchr.c
 							
 NOW			=	$(shell date +"%d-%m-%y %H:%M")
 
