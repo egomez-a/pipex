@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/17 15:47:15 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/18 11:37:21 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,25 @@ void 	start_child(int *fd, char **argv)
 //	close(fd[FD_WRITE_END]);				/* cierro el fd del pipe */
 }
 
+void	add_slash(char **paths)
+{
+	int	i;
+
+	i = 0;
+	while (paths[i])
+	{
+		paths[i] = ft_strjoin(paths[i], "/");
+		i++;
+	}
+	i = 0;
+	paths[0] = 
+	while (paths[i])
+	{
+		printf("El path %d es %s\n", i, paths[i]);
+		i++;
+	}
+}
+
 void	env_variable(char **envp)
 {
 	int		i;
@@ -61,28 +80,30 @@ void	env_variable(char **envp)
 	char	**paths;
 
 	i = 0;
+	paths = NULL;
 	if (envp)
 	{
 		while(envp[i])
 		{
-			paths = ft_strnstr(env[i], "PATH=", ft_strlen("PATH="));
-			if (paths != NULL)
+			path_line = ft_strnstr(envp[i], "PATH=", ft_strlen("PATH="));
+			if (path_line != NULL)
 				break;
 			i++;
 		}
 		paths = ft_split(path_line, ':');
-		
+		add_slash(paths);
 	}
 	else 
-		printf("Error - no env variable provided\n");
+		printf("Error - no env variable found\n");
 }
 
 int main(int argc, char **argv, char **envp)
 {
-    int		fd[2];
-	int		status;
-	pid_t	pid;
-	t_pipex	pipe;
+    // int		fd[2];
+	// int		fd2;
+	// int		status;
+	// pid_t	pid;
+	// t_pipex	pipe;
 
 // Busca que tengo la variable de entorno 
 // Busca que existe path
@@ -91,31 +112,32 @@ int main(int argc, char **argv, char **envp)
 // comprueba que el nombre del command existe 
 
 	check_entry(argc);
-	pipe.fd_in = open_infile(argv[1]);
+	argv = NULL;
+//	pipe.fd_in = open_infile(argv[1]);
 	env_variable(envp);
-	pipe(fd);				/* comunica los dos comandos */
-	pid = fork();
-	if (pid == -1)
-		perror("Error. Proceso hijo no creado. \n");
-	if(pid == 0)	/* hijo 1, ejecuta "comando1 */
-		start_child(fd, argv);
-	else					/* padre */
-	{
-		close(fd[FD_WRITE_END]);		/* extremo no necesario ya */
-		pid = fork();
-	 	if(pid == 0)			/* hijo 2, ejecuta "comando2" */
-	 	{
-	 		fd2 = open(FILE_NAME, O_WRONLY);  // abro fd del archivo txt donde escribe... cambiar
-	 		dup2(fd[FD_READ_END], STDIN_FILENO);
-	 		close(fd[FD_READ_END]);
-	 		dup2(fd2, STDOUT_FILENO);
-	//		execlp("/usr/bin/wc","wc",NULL);
-	 	}
-	 	else /* padre */
-	 	{
-	 		close(fd[FD_READ_END]);      /* cerrar extremo no necesario */
-	 	}
-	}
+	// pipe(fd);				/* comunica los dos comandos */
+	// pid = fork();
+	// if (pid == -1)
+	// 	perror("Error. Proceso hijo no creado. \n");
+	// if(pid == 0)	/* hijo 1, ejecuta "comando1 */
+	// 	start_child(fd, argv);
+	// else					/* padre */
+	// {
+	// 	close(fd[FD_WRITE_END]);		/* extremo no necesario ya */
+	// 	pid = fork();
+	//  	if(pid == 0)			/* hijo 2, ejecuta "comando2" */
+	//  	{
+	//  		fd2 = open(argv[1], O_WRONLY);  // abro fd del archivo txt donde escribe... cambiar
+	//  		dup2(fd[FD_READ_END], STDIN_FILENO);
+	//  		close(fd[FD_READ_END]);
+	//  		dup2(fd2, STDOUT_FILENO);
+	// //		execlp("/usr/bin/wc","wc",NULL);
+	//  	}
+	//  	else /* padre */
+	//  	{
+	//  		close(fd[FD_READ_END]);      /* cerrar extremo no necesario */
+	//  	}
+	// }
 	/* wait para cada hijo */
 	// wait(&status);
 	// wait(&status);

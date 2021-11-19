@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:47:51 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/17 13:48:48 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/18 11:20:33 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 ** it is trying to create: lenght of src plus initial lenght of dst
 */
 
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+size_t	ft_strlcat(char *dest, char *src, size_t size)
 {
-	unsigned int	lensrc;
-	unsigned int	lendst;
-	unsigned int	i;
+	size_t	lensrc;
+	size_t	lendst;
+	size_t	i;
 
 	lensrc = 0;
 	lendst = 0;

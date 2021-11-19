@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:15:19 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/17 14:15:51 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/18 11:22:34 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 char	*ft_strnstr(const char *hst, const char *ndl, size_t len)
 {
-	unsigned int		i;
-	unsigned int		j;
+	size_t		i;
+	size_t		j;
 
 	if (ndl[0] == '\0')
 		return ((char *)hst);
