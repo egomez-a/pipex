@@ -6,121 +6,52 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/19 19:43:08 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/22 11:11:58 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-
-void	check_entry(argc)
-{
-	if (argc != 5)
-	{
-		printf("Error. Please include infile comand1 comand2 outfile\n");
-	}
-	return ;
-}
-
-void	check_fd(int fd, char *filename)
-{
-	if (fd == -1)
-	{
-		ft_putstr_fd("pipex: no file existing ", 2);
-		ft_putendl_fd(filename, 2);
-		exit(0);	
-	}
-	else if (fd == -2)
-	{
-		ft_putstr_fd("pipex: can't access file", 2);
-		ft_putendl_fd(filename, 2);
-		exit(0);	
-	}
-}
-
-void 	start_child(int *fd, char **argv)
-{
-	int		fd_infile;
-	
+void 	start_child(int *fd, t_pipe *pipe, char **envp)
+{	
 	close(fd[FD_READ_END]);   				/* cerrar extremo no necesario */
-	fd_infile = open(argv[1], O_RDONLY);	/* abro in file */
-	printf("El fd_infile es %d", fd_infile);
-	printf("El STDIN_FILENO es %d,", STDIN_FILENO);
-	check_fd(fd_infile, argv[1]);			/* compruebo que puedo abrir */
-	dup2(fd_infile, STDIN_FILENO);			/* duplico para que sea STDIN */
-	
-	close(fd_infile); 						/* lo cierro */
-//	dup2(fd[FD_WRITE_END], STDOUT_FILENO);	/* duplico para pipe */
-//	close(fd[FD_WRITE_END]);				/* cierro el fd del pipe */
+	dup2(pipe.fd_in, STDIN_FILENO);			/* duplico para que sea STDIN */
+	close(pipe.fd_in); 						/* lo cierro */
+	dup2(fd[FD_WRITE_END], STDOUT_FILENO);	/* duplico para pipe */
+	close(fd[FD_WRITE_END]);				/* cierro el fd del pipe */
+	if (execve(pipe->cmd1[0], pipe.cmd1, envp) == -1)
+    	perror("Could not execve");
 }
 
-void	add_slash(char **paths)
+int	open_infile(char *argv1)
 {
-	int	i;
+	int fd;
 
-	i = 0;
-	while (paths[i])
-	{
-		paths[i] = ft_strjoin(paths[i], "/");
-		i++;
-	}
-	paths[0] = ft_strtrim(paths[0], "PATH=");
-	i = 0;
-	while(paths[i])
-	{
-		printf("El path %d es %s\n", i, paths[i]);
-		i++;
-	}
-}
-
-void	env_variable(char **envp)
-{
-	int		i;
-	char	*path_line;
-	char	**paths;
-
-	i = 0;
-	paths = NULL;
-	if (envp)
-	{
-		while(envp[i])
-		{
-			path_line = ft_strnstr(envp[i], "PATH=", ft_strlen("PATH="));
-			if (path_line != NULL)
-				break;
-			i++;
-		}
-		paths = ft_split(path_line, ':');
-		add_slash(paths);
-	}
-	else 
-		printf("Error - no env variable found\n");
+	fd = open(argv1, O_RDONLY);
+	check_fd(fd, argv1);
+	return (fd);
 }
 
 int main(int argc, char **argv, char **envp)
 {
-    // int		fd[2];
-	// int		fd2;
-	// int		status;
-	// pid_t	pid;
-	// t_pipex	pipe;
-
-// Busca que tengo la variable de entorno 
-// Busca que existe path
-// Separa con splits los distintos paths 
-// Añade un / 
-// comprueba que el nombre del command existe 
+    int			fd[2];
+	int			fd2;
+	int			status;
+	pid_t		pid;
+	t_pipe		pipe;
 
 	check_entry(argc);
-	argv = NULL;
-//	pipe.fd_in = open_infile(argv[1]);
+	pipe.fd_in = open_infile(argv[1]);
 	env_variable(envp);
-	// pipe(fd);				/* comunica los dos comandos */
-	// pid = fork();
-	// if (pid == -1)
-	// 	perror("Error. Proceso hijo no creado. \n");
-	// if(pid == 0)	/* hijo 1, ejecuta "comando1 */
-	// 	start_child(fd, argv);
+	check_program(argv[2], argv[3], pipe);
+	pipe(fd);				/* comunica los dos comandos */
+	if (pipe(fd < 0))
+		perror("Pipe error. Pipe not created. \n");
+	pid = fork();
+	if (pid == -1)
+		perror("Fork error. Child not created. \n");
+	if(pid == 0)	/* hijo 1, ejecuta "comando1 */
+		start_child(fd, &pipe, envp);
 	// else					/* padre */
 	// {
 	// 	close(fd[FD_WRITE_END]);		/* extremo no necesario ya */

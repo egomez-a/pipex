@@ -6,7 +6,7 @@
 #    By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/10 14:37:38 by egomez-a          #+#    #+#              #
-#    Updated: 2021/11/19 19:47:24 by egomez-a         ###   ########.fr        #
+#    Updated: 2021/11/22 12:28:54 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ OBJ_DIR		= 	obj/
 INC_DIR		= 	include/
 
 SRCS 		=	pipex.c \
+				paths.c \
+				checkerrors.c \
 				ft_putendl_fd.c \
 				ft_split.c \
 				ft_putstr_fd.c \
@@ -26,7 +28,8 @@ SRCS 		=	pipex.c \
 				ft_strnstr.c \
 				ft_strncmp.c \
 				ft_strtrim.c \
-				ft_strchr.c
+				ft_strchr.c \
+				ft_strdup.c
 							
 NOW			=	$(shell date +"%d-%m-%y %H:%M")
 
