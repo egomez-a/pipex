@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/22 12:27:49 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/24 20:57:28 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 
 typedef struct s_pipe
 {
-	int		fd_in;
-	int		fd_out;
 	char	**cmd1;
 	char	**cmd2;
 	char	**path;
@@ -49,16 +47,17 @@ char	*ft_strdup(const char *s1);
 size_t	ft_begtrim(char const *s1, char const *set);
 
 /* Funciones pipex */
-int 	main(int argc, char **argv, char **env);
-void 	start_child(int *fd, char **argv);
+void	start_child_1(int *fd, char **argv, t_pipe *pipe, char **envp);
+void	start_child_2(int *fd2, char **argv, t_pipe *pipe, char **envp);
+int 	main(int argc, char **argv, char **envp);
 
 /* Funciones check */
 void	check_entry(int argc);
 void	check_fd(int fd, char *filename);
+void	check_program(char *argv1, char *argv2, t_pipe pipe);
 
 /* Funciones path */
 void	env_variable(char **envp);
 void	add_slash(char **paths);
-
 
 #endif
