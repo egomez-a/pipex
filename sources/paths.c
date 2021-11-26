@@ -6,28 +6,26 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:55:36 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/24 20:53:11 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/26 12:32:50 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-void	check_program(char *argv1, char *argv2, t_pipe pipe)
+void	check_program(t_pipex pipex)
 {
 	int		i;
 	char	*cmd[2];
 
-	pipe->cmd1 = ft_split(argv1, ' ');
-	pipe->cmd2 = ft_split(argv2, ' ');
 	i = 0;
-	while (pipe->paths[i])
+	while (pipex.path[i])
 	{
-		cmd[0] = ft_strjoin(pipe->path[i], pipe->cmd1[0]);
+		cmd[0] = ft_strjoin(pipex.path[i], pipex.cmd1[0]);
 		if (!access(cmd[0], X_OK))
-			pipe->cmd1[0] = ft_strdup(cmd[1]);
-		cmd[1] = ft_strjoin(pipe->path[i], pipe->cmd2[0]);
+			pipex.cmd1[0] = ft_strdup(cmd[1]);
+		cmd[1] = ft_strjoin(pipex.path[i], pipex.cmd2[0]);
 		if (!access(cmd[1], X_OK))
-			pipe->cmd2[0] = ft_strdup(cmd[1]);
+			pipex.cmd2[0] = ft_strdup(cmd[1]);
 	}
 }
 
@@ -50,14 +48,13 @@ void	add_slash(char **paths)
 	}
 }
 
-void	env_variable(char **envp)
+char	**env_variable(char **envp)
 {
 	int		i;
 	char	*path_line;
 	char	**paths;
 
 	i = 0;
-	paths = NULL;
 	if (envp)
 	{
 		while (envp[i])
@@ -71,5 +68,9 @@ void	env_variable(char **envp)
 		add_slash(paths);
 	}
 	else
+	{
+		paths = NULL;
 		printf("Error - no env variable found\n");
+	}
+	return (paths);
 }

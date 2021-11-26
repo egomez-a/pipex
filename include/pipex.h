@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/24 20:57:28 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/26 12:28:00 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 # define FD_READ_END    0    /* index pipe extremo lectura */
 # define FD_WRITE_END   1    /* index pipe extremo escritura */
 
-typedef struct s_pipe
+typedef struct s_pipex
 {
 	char	**cmd1;
 	char	**cmd2;
 	char	**path;
-}			t_pipe;
+}			t_pipex;
 
 /* Funciones útiles */
 char	**ft_split(const char *s, char c);
@@ -47,17 +47,17 @@ char	*ft_strdup(const char *s1);
 size_t	ft_begtrim(char const *s1, char const *set);
 
 /* Funciones pipex */
-void	start_child_1(int *fd, char **argv, t_pipe *pipe, char **envp);
-void	start_child_2(int *fd2, char **argv, t_pipe *pipe, char **envp);
+void	start_child_1(int *fd, char **argv, t_pipex *pipex, char **envp);
+void	start_child_2(int *fd2, char **argv, t_pipex *pipex, char **envp);
 int 	main(int argc, char **argv, char **envp);
 
 /* Funciones check */
 void	check_entry(int argc);
 void	check_fd(int fd, char *filename);
-void	check_program(char *argv1, char *argv2, t_pipe pipe);
+void	check_program(t_pipex pipex);
 
 /* Funciones path */
-void	env_variable(char **envp);
+char	**env_variable(char **envp);
 void	add_slash(char **paths);
 
 #endif
