@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:55:36 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/26 12:32:50 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/26 12:51:07 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void	add_slash(char **paths)
 		i++;
 	}
 	paths[0] = ft_strtrim(paths[0], "PATH=");
-	i = 0;
-	while (paths[i])
-	{
-		printf("El path %d es %s\n", i, paths[i]);
-		i++;
-	}
+	// i = 0;
+	// while (paths[i])
+	// {
+	// 	printf("El path %d es %s\n", i, paths[i]);
+	// 	i++;
+	// }
 }
 
 char	**env_variable(char **envp)
@@ -65,7 +65,13 @@ char	**env_variable(char **envp)
 			i++;
 		}
 		paths = ft_split(path_line, ':');
-		add_slash(paths);
+		i = 0;
+		while (paths[i])
+		{
+			paths[i] = ft_strjoin(paths[i], "/");
+			i++;
+		}
+		paths[0] = ft_strtrim(paths[0], "PATH=");
 	}
 	else
 	{

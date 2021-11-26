@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/26 12:29:52 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/26 12:48:03 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	start_child_1(int *fd, char **argv, t_pipex *pipex, char **envp)
 {	
 	int		fd_infile;
 
+	printf("Entrando en el child 1");
 	fd_infile = open(argv[1], O_RDONLY);
+	printf("Abierto el infile con fd = %d", fd_infile);
 	check_fd(fd_infile, argv[1]);
 	dup2(fd_infile, STDIN_FILENO);
 	close(fd_infile);
@@ -34,6 +36,7 @@ void	start_child_2(int *fd, char **argv, t_pipex *pipex, char **envp)
 {
 	int		fd_outfile;
 	
+	printf("Entrando en el child 2");
 	close(fd[FD_WRITE_END]);
 	fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC);
 	dup2(fd[FD_READ_END], STDIN_FILENO);
@@ -54,8 +57,8 @@ int main(int argc, char **argv, char **envp)
 	t_pipex		pipex;
 	
 	check_entry(argc);
-	pipex.cmd1 = ft_split(argv[1], ' ');
-	pipex.cmd2 = ft_split(argv[2], ' ');
+	pipex.cmd1 = ft_split(argv[2], ' ');
+	pipex.cmd2 = ft_split(argv[3], ' ');
 	pipex.path = env_variable(envp);
 	check_program(pipex);
 	pipe(fd);
