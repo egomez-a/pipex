@@ -6,7 +6,7 @@
 #    By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/10 14:37:38 by egomez-a          #+#    #+#              #
-#    Updated: 2021/11/22 12:28:54 by egomez-a         ###   ########.fr        #
+#    Updated: 2021/11/27 18:48:53 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ INC_DIR		= 	include/
 
 SRCS 		=	pipex.c \
 				paths.c \
+				checkprogram.c \
 				checkerrors.c \
 				ft_putendl_fd.c \
 				ft_split.c \

@@ -6,59 +6,37 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/22 12:28:39 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:22:48 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "../include/pipex.h"
 
-# include <stdlib.h>	/* necesario para funcion perror */
-# include <unistd.h>	/* necesario para funcion access dup2 execve */
-# include <stdio.h>		/* necesario para funcion perror */
-# include <sys/wait.h>	/* necesario para funcion wait */
-# include <fcntl.h>
+/*
+** strdup allocates sufficient memory for a copy of the string s1, does the
+** copy, and returns a pointer to it.  The pointer may subsequently be used as
+** an argument to the function free(3). If insufficient memory is available,
+** NULL is returned and errno is set to ENOMEM.
+*/
 
-# define FD_READ_END    0    /* index pipe extremo lectura */
-# define FD_WRITE_END   1    /* index pipe extremo escritura */
-
-typedef struct s_pipe
+char	*ft_strdup(const char *s1)
 {
-	int		fd_in;
-	int		fd_out;
-	char	**cmd1;
-	char	**cmd2;
-	char	**path;
-}			t_pipe;
+	int		len;
+	int		i;
+	char	*ptr;
 
-/* Funciones útiles */
-char	**ft_split(const char *s, char c);
-size_t	ft_strlen(const char *str);
-size_t	ft_strlcpy(char *dest, const char *src, size_t size);
-char	*ft_strchr(const char *s, int c);
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putendl_fd(char *s, int fd);
-void	ft_putchar_fd(char c, int fd);
-char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlcat(char *dest, char *src, size_t size);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_strnstr(const char *hst, const char *ndl, size_t len);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strtrim(char const *s1, char const *set);
-char	*ft_strdup(const char *s1);
-size_t	ft_begtrim(char const *s1, char const *set);
-
-/* Funciones pipex */
-int 	main(int argc, char **argv, char **env);
-void 	start_child(int *fd, char **argv);
-
-/* Funciones check */
-void	check_entry(int argc);
-void	check_fd(int fd, char *filename);
-
-/* Funciones path */
-void	env_variable(char **envp);
-void	add_slash(char **paths);
-
-
-#endif
+	len = 0;
+	while (s1[len])
+		len++;
+	ptr = (char *)malloc(sizeof(char) * (len + 1));
+	if (!(ptr))
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		ptr[i] = s1[i];
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
+}

@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/26 12:28:00 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:47:01 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ int 	main(int argc, char **argv, char **envp);
 /* Funciones check */
 void	check_entry(int argc);
 void	check_fd(int fd, char *filename);
-void	check_program(t_pipex pipex);
+int		*check_cmd_path(t_pipex pipex);
+void	check_program(t_pipex pipex, char **cmd, int *check);
+
 
 /* Funciones path */
 char	**env_variable(char **envp);
