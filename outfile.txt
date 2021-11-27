@@ -1,1 +1,1 @@
-Error: not able to execute cmdEntrando en el child 2
+       0

@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/27 18:56:34 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:59:03 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	start_child_1(int *fd, char **argv, t_pipex *pipex, char **envp)
 	close(fd_infile);
 	dup2(fd[FD_WRITE_END], STDOUT_FILENO);
 	close(fd[FD_WRITE_END]);
-	if (execve(*pipex->cmd1[0], pipex->cmd1, envp) == -1)
+	if (execve(pipex->cmd1[0], pipex->cmd1, envp) == -1)
 	{
 		perror("Could not execve cmd 1");
 		free(pipex);
@@ -42,7 +42,7 @@ void	start_child_2(int *fd, char **argv, t_pipex *pipex, char **envp)
 	dup2(fd[FD_READ_END], STDIN_FILENO);
 	close(fd[FD_READ_END]);
 	dup2(fd_outfile, STDOUT_FILENO);
-	if (execve(*pipex->cmd2[0], pipex->cmd2, envp) == -1)
+	if (execve(pipex->cmd2[0], pipex->cmd2, envp) == -1)
 	{
     	perror("Could not execve cmd 2");
 		free(pipex);
