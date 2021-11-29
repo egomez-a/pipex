@@ -6,7 +6,7 @@
 #    By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/10 14:37:38 by egomez-a          #+#    #+#              #
-#    Updated: 2021/11/29 16:42:57 by egomez-a         ###   ########.fr        #
+#    Updated: 2021/11/29 17:26:47 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,8 @@ NOW			=	$(shell date +"%d-%m-%y %H:%M")
 
 OBJS 		= 	$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
-CFLAGS 		= 	-Wall -Wextra -Werror -g3 -fsanitize=address -O0 #$(DEBUGGING)#
-DEBUGGING	= 	
+CFLAGS 		= 	-Wall -Wextra -Werror
+DEBUGGING	= 	-g3 -fsanitize=address -O0
 LFLAGS		= 	-I$(INC_DIR)
 CC 			= 	gcc
 RM 			= 	rm -rf			#-f es para evitar que borre si no hay nada que borrar
@@ -56,10 +56,10 @@ all: $(NAME)
 
 $(OBJ_DIR)%.o : $(SRCS_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) -c $(CFLAGS)  $(LFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) $(LFLAGS) $< -o $@
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS)-o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) $(DEBUGGING) -o $(NAME) $(OBJS)
 	@echo $(BLUE) "======== COMPILED  ==========" $(NONE)
 
 clean:

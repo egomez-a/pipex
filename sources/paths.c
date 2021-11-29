@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:55:36 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 16:35:40 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 17:23:20 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	**add_slash(char **paths)
 {
 	int		i;
 	char	**aux;
+	char 	*first;
 
 	i = 0;
 	
@@ -25,13 +26,18 @@ char	**add_slash(char **paths)
 	i = 0;
 	while (paths[i])
 	{
-		aux[i] = ft_strjoin(paths[i], "/");
+		if (i == 0)
+		{	
+			first = ft_strtrim(paths[i], "PATH=");
+			aux[i] = ft_strjoin(first, "/");
+		}
+		else
+			aux[i] = ft_strjoin(aux[i], "/");
 		free(paths[i]);
 		i++;
 	}
 	free(paths);
 	return (aux);
-//	aux[0] = ft_strtrim(paths[0], "PATH=");
 }
 
 char	**env_variable(char **envp)
@@ -49,6 +55,11 @@ char	**env_variable(char **envp)
 			if (path_line != NULL)
 				break ;
 			i++;
+		}
+		if (!path_line)
+		{
+			perror("Error - no pathline in env\n");
+			exit (errno);
 		}
 		paths = ft_split(path_line, ':');
 		paths = add_slash(paths);
