@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 13:37:01 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 15:24:43 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>		/* necesario para funcion perror */
 # include <sys/wait.h>	/* necesario para funcion wait */
 # include <fcntl.h>
+# include <errno.h>
 
 # define FD_READ_END    0    /* index pipe extremo lectura */
 # define FD_WRITE_END   1    /* index pipe extremo escritura */
