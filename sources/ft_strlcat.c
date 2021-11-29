@@ -6,11 +6,11 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:47:51 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/18 11:20:33 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 16:16:30 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include <pipex.h>
 
 /*
 ** strlcat() takes the full size of the destination buffer and guarantees

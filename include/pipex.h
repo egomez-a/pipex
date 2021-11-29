@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 15:24:43 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 16:43:41 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdio.h>		/* necesario para funcion perror */
 # include <sys/wait.h>	/* necesario para funcion wait */
 # include <fcntl.h>
-# include <errno.h>
+# include <errno.h>		/* necesario para funcion errno */
 
 # define FD_READ_END    0    /* index pipe extremo lectura */
 # define FD_WRITE_END   1    /* index pipe extremo escritura */
@@ -32,6 +32,7 @@ typedef struct s_pipex
 
 /* Funciones útiles */
 char	**ft_split(const char *s, char c);
+void	*ft_calloc(size_t count, size_t size);
 size_t	ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 char	*ft_strchr(const char *s, int c);
@@ -49,7 +50,6 @@ size_t	ft_begtrim(char const *s1, char const *set);
 void	leaks(void);
 void	freematrix(char **split);
 
-
 /* Funciones pipex */
 void	start_child_1(int *fd, char **argv, t_pipex pipex, char **envp);
 void	start_child_2(int *fd2, char **argv, t_pipex pipex, char **envp);
@@ -65,6 +65,6 @@ void	check_program(t_pipex pipex, char **cmd, int *check);
 
 /* Funciones path */
 char	**env_variable(char **envp);
-void	add_slash(char **paths);
+char	**add_slash(char **paths);
 
 #endif

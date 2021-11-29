@@ -1,5 +1,10 @@
 {
     "tasks": [
+		{
+			"label": "compile",
+			"type": "shell",
+			"command": "make re",
+		},
         {
             "type": "cppbuild",
             "label": "C/C++: gcc compilar archivo activo",

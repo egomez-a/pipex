@@ -6,11 +6,11 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 11:35:07 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 11:39:52 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 16:16:30 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include <pipex.h>
 
 void	leaks(void)
 {

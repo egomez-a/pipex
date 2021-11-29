@@ -6,11 +6,11 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:15:19 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/18 11:22:34 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 16:16:30 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include <pipex.h>
 
 /*
 ** The strnstr() function locates the first occurrence of the null-terminated

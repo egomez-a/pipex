@@ -6,17 +6,18 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 09:59:29 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 14:00:07 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 16:16:30 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include <pipex.h>
 
 void	check_entry(argc)
 {
 	if (argc != 5)
 	{
-		printf("Error. Please include infile comand1 comand2 outfile\n");
+		perror("Error. Please include infile comand1 comand2 outfile\n");
+		exit (errno);
 	}
 	return ;
 }

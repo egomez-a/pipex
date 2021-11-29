@@ -5,6 +5,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"preLaunchTask": "compile",
 			"name": "(lldb) Iniciar",
 			"type": "cppdbg",
 			"request": "launch",

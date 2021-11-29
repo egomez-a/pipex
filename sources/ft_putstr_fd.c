@@ -6,11 +6,11 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:21:51 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/10 17:23:56 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 16:16:30 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include <pipex.h>
 
 /* Escribe la cadena de caracteres ’s’ sobre el
 ** descriptor de fichero proporcionado.

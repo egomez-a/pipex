@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 13:48:55 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 16:16:30 by egomez-a         ###   ########.fr       */
+/*   Created: 2021/11/29 16:38:04 by egomez-a          #+#    #+#             */
+/*   Updated: 2021/11/29 16:43:56 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-/* 
-** Compares up to n characters of the string s1 to those of the string s2.   
-** Returns an integral value indicating the relationship between the strings.
-*/
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	*ft_calloc(size_t count, size_t size)
 {
-	if (n == 0)
-		return (0);
-	while ((*s1 == *s2) && --n && *s1 && *s2)
+	void	*ptr;
+	size_t	i;
+
+	ptr = malloc(count * size);
+	if (ptr == NULL)
+		return (ptr);
+	i = 0;
+	while (i < size * count)
 	{
-		s1++;
-		s2++;
+		((unsigned char *)ptr)[i] = 0;
+		i++;
 	}
-	return ((unsigned char)*s1 - (unsigned char)*s2);
+	return (ptr);
 }
