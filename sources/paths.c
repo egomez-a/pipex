@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:55:36 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 09:06:59 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 11:57:46 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 void	add_slash(char **paths)
 {
-	int	i;
+	int		i;
+	char	*aux;
 
 	i = 0;
 	while (paths[i])
 	{
-		paths[i] = ft_strjoin(paths[i], "/");
+		aux = ft_strjoin(paths[i], "/");
+		free(paths[i]);
+		paths[i] = aux;
 		i++;
 	}
 	paths[0] = ft_strtrim(paths[0], "PATH=");
@@ -38,22 +41,15 @@ char	**env_variable(char **envp)
 		{
 			path_line = ft_strnstr(envp[i], "PATH=", ft_strlen("PATH="));
 			if (path_line != NULL)
-				break ;
+			{
+				paths = ft_split(path_line, ':');
+				add_slash(paths);
+				return (paths);
+			}
 			i++;
 		}
-		paths = ft_split(path_line, ':');
-		i = 0;
-		while (paths[i])
-		{
-			paths[i] = ft_strjoin(paths[i], "/");
-			i++;
-		}
-		paths[0] = ft_strtrim(paths[0], "PATH=");
 	}
 	else
-	{
-		paths = NULL;
 		printf("Error - no env variable found\n");
-	}
-	return (paths);
+	return (NULL);
 }

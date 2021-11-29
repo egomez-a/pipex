@@ -6,7 +6,7 @@
 #    By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/10 14:37:38 by egomez-a          #+#    #+#              #
-#    Updated: 2021/11/27 18:48:53 by egomez-a         ###   ########.fr        #
+#    Updated: 2021/11/29 11:52:18 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ SRCS 		=	pipex.c \
 				checkprogram.c \
 				checkerrors.c \
 				ft_putendl_fd.c \
-				ft_split.c \
 				ft_putstr_fd.c \
+				ft_split.c \
 				ft_strlcpy.c \
 				ft_strlen.c \
 				ft_strjoin.c \
@@ -30,7 +30,9 @@ SRCS 		=	pipex.c \
 				ft_strncmp.c \
 				ft_strtrim.c \
 				ft_strchr.c \
-				ft_strdup.c
+				ft_strdup.c \
+				ft_leaks.c \
+				ft_freematrix.c
 							
 NOW			=	$(shell date +"%d-%m-%y %H:%M")
 

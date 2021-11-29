@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/27 18:47:01 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 11:54:50 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strdup(const char *s1);
 size_t	ft_begtrim(char const *s1, char const *set);
+void	leaks(void);
+void	freematrix(char **split);
+
 
 /* Funciones pipex */
 void	start_child_1(int *fd, char **argv, t_pipex *pipex, char **envp);

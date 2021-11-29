@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 09:39:01 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 11:55:07 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,16 @@ int main(int argc, char **argv, char **envp)
 	int 		*check;
 	
 	check_entry(argc);
+	atexit(leaks);
 	pipex.cmd1 = ft_split(argv[2], ' ');
 	pipex.cmd2 = ft_split(argv[3], ' ');
 	pipex.path = env_variable(envp);
-	printf("Command 1 es %s %s %s\n", pipex.cmd1[0], pipex.cmd1[1], pipex.cmd1[2]);
+	printf("Command 1 es %s %s\n", pipex.cmd1[0], pipex.cmd1[1]);
 	printf("Command 1 es %s %s\n", pipex.cmd2[0], pipex.cmd2[1]);
 	i = 0;
 	while (pipex.path[i])
 	{
-		printf("Paths %s %s %s %s %s %s\n", pipex.path[0], pipex.path[1], pipex.path[2], pipex.path[3], pipex.path[4], pipex.path[5]);
+		printf("Paths %d %s\n", i, pipex.path[i]);
 		i++;
 	}
 	check = check_cmd_path(pipex);
@@ -93,5 +94,8 @@ int main(int argc, char **argv, char **envp)
 			close(fd[FD_READ_END]);
 	}
 	waitpid(pid, NULL, 0);
+	freematrix(pipex.cmd1);
+	freematrix(pipex.cmd1);
+	freematrix(pipex.path);
 	return 0;
 }
