@@ -6,11 +6,11 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 16:16:30 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 18:08:58 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include "pipex.h"
 
 /*
 ** strdup allocates sufficient memory for a copy of the string s1, does the

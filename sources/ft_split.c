@@ -6,11 +6,11 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:05:52 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 16:16:30 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 18:09:06 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include "pipex.h"
 
 /* Reserva con malloc(3) y devuelve un array de strings obtenido al separar */
 /* ’s’ con el caracter ’c’ como delimitador. El array debe terminar en NULL. */

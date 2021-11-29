@@ -6,11 +6,11 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 14:25:32 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 16:16:30 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 18:08:35 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include "pipex.h"
 
 /*
 ** Reserva memoria con malloc y devuelve la cadena de caracteres que es copia

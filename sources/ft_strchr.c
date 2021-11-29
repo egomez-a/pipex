@@ -6,11 +6,11 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:45:30 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 16:16:30 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 18:09:01 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include "pipex.h"
 
 /*
 ** The strchr() function locates the first occurrence of c (converted to a char)

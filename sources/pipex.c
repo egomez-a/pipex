@@ -6,11 +6,11 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 15:58:19 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 18:12:57 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "pipex.h"
 
 void	freepointers(t_pipex pipex)
 {
@@ -85,6 +85,7 @@ int main(int argc, char **argv, char **envp)
 	int 		status;
 	int 		*check;
 	
+	printf("El numero de argumentos es %d\n", argc);
 	check_entry(argc);
 	pipex.cmd1 = ft_split(argv[2], ' ');
 	pipex.cmd2 = ft_split(argv[3], ' ');

@@ -6,11 +6,11 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:55:36 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 17:39:51 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 18:12:36 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include "pipex.h"
 
 char	**add_slash(char **paths)
 {
@@ -22,7 +22,7 @@ char	**add_slash(char **paths)
 	
 	while (paths[i])
 	{
-		printf ("Path %d = %s\n", i, paths[i]);
+//		printf ("Path %d = %s\n", i, paths[i]);
 		i++;
 	}
 	aux = ft_calloc(sizeof (char *), i);
@@ -59,12 +59,12 @@ char	**env_variable(char **envp)
 		while (envp[i])
 		{
 			path_line = ft_strnstr(envp[i], "PATH=", ft_strlen("PATH="));
-			printf("Pathline de linea %d es %s\n", i, path_line);
+//			printf("Pathline de linea %d es %s\n", i, path_line);
 			if (path_line != NULL)
 				break ;
 			i++;
 		}
-		printf("Pathline final en linea %d es %s\n", i, path_line);
+//		printf("Pathline final en linea %d es %s\n", i, path_line);
 		if (!path_line)
 		{
 			perror("Error - no pathline in env\n");

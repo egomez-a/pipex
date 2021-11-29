@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 17:41:44 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 18:02:50 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ void	leaks(void);
 void	freematrix(char **split);
 
 /* Funciones pipex */
-void	start_child_1(int *fd, char **argv, t_pipex pipex, char **envp);
-void	start_child_2(int *fd2, char **argv, t_pipex pipex, char **envp);
 int 	main(int argc, char **argv, char **envp);
+void	start_child_1(int *fd, char **argv, t_pipex pipex, char **envp);
+void	child_2_process(int *fd, int pid, t_pipex pipex, char **argv, char **envp);
+void	start_child_2(int *fd2, char **argv, t_pipex pipex, char **envp);
 void	freepointers(t_pipex pipex);
 
 /* Funciones check */
