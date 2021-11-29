@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 16:43:41 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 17:41:44 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>	/* necesario para funcion access dup2 execve */
 # include <stdio.h>		/* necesario para funcion perror */
 # include <sys/wait.h>	/* necesario para funcion wait */
-# include <fcntl.h>
+# include <fcntl.h>		/* necesario para funcion open */
 # include <errno.h>		/* necesario para funcion errno */
 
 # define FD_READ_END    0    /* index pipe extremo lectura */

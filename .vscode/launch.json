@@ -14,7 +14,7 @@
 			"args": ["infile.txt", "ls -l", "wc -l", "outfile.txt"],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",
-			"environment": [],
+			"environment": [{"name": "DYLD_LIBRATY_PATH", "value": "/Users/x/boost_1_63_0/stage/lib/"}],
 			"externalConsole": false,
 			"MIMode": "lldb"
 		},
