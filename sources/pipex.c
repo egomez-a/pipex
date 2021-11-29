@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 15:30:36 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 15:34:24 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	child_2_process(int *fd, int pid, t_pipex pipex, char **argv, char **envp)
 		close(fd[FD_WRITE_END]);
 	}
 }
+
 
 int main(int argc, char **argv, char **envp)
 {
