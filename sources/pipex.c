@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 13:38:36 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 14:05:37 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	start_child_1(int *fd, char **argv, t_pipex pipex, char **envp)
 {	
 	int		fd_infile;
 
-	printf("Entrando en el child 1");
+	printf("Entrando en el child 1\n");
 	fd_infile = open(argv[1], O_RDONLY);
-	printf("Abierto el infile con fd = %d", fd_infile);
+	printf("Abierto el infile con fd = %d\n", fd_infile);
 	check_fd(fd_infile, argv[1]);
 	dup2(fd_infile, STDIN_FILENO);
 	close(fd_infile);
@@ -44,18 +44,38 @@ void	start_child_2(int *fd, char **argv, t_pipex pipex, char **envp)
 {
 	int		fd_outfile;
 	
-	printf("Entrando en el child 2");
+	printf("Entrando en el child 2\n");
 	close(fd[FD_WRITE_END]);
-	fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC);
+	fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	printf("Outfile creada con fd = %d", fd_outfile);
+	if (fd_outfile < 0)
+		printf("Error creating or opening outfile\n");
 	dup2(fd[FD_READ_END], STDIN_FILENO);
 	close(fd[FD_READ_END]);
 	dup2(fd_outfile, STDOUT_FILENO);
 	printf("Saliendo del proceso hijo2\n");
 	if (execve(pipex.cmd2[0], pipex.cmd2, envp) == -1)
 	{
-    	perror("Could not execve cmd 2");
+    	perror("Could not execve cmd 2\n");
 		freepointers(pipex);
 		exit(0);
+	}
+}
+
+void	child_2_process(int *fd, int pid, t_pipex pipex, char **argv, char **envp)
+{
+	printf("****Voy a generar el segundo proceso\n");
+	close(fd[FD_WRITE_END]);
+	pid = fork();
+	printf("    el número pid del proceso Hijo2 generado es %d\n", pid);
+	if (pid == -1)
+		perror("Fork error. Child not created. \n");
+	if(pid == 0)
+		start_child_2(fd, argv, pipex, envp);
+	else
+	{
+		close(fd[FD_READ_END]);
+		close(fd[FD_WRITE_END]);
 	}
 }
 
@@ -81,30 +101,22 @@ int main(int argc, char **argv, char **envp)
 	}
 	check = check_cmd_path(pipex);
 	if (check[0] == 0 || check[1] == 0)
-		printf("Error: not able to execute cmd");
+		printf("Error: not able to execute cmd\n");
 	pipe(fd);
 	printf("Acabo de iniciar el pipe\n");
+	printf("     El fd del pipe de lectura es %d\n", fd[FD_READ_END]);
+	printf("     El fd del pipe de escritura es %d\n", fd[FD_WRITE_END]);
 	if (pipe(fd) < 0)
-		perror("Pipe error. Pipe not created. \n");
+		perror("     Pipe error. Pipe not created. \n");
 	pid = fork();
-	printf("el número pid del proceso Hijo1 generado es %d\n", pid);
+	printf("****He generado el primer proceso\n");
+	printf("    el número pid del proceso Hijo1 generado es %d\n", pid);
 	if (pid == -1)
 		perror("Fork error. Child not created. \n");
 	if(pid == 0)
 		start_child_1(fd, argv, pipex, envp);
 	else
-	{
-		printf("Voy a generar el segundo proceso\n");
-		close(fd[FD_WRITE_END]);
-		pid = fork();
-		printf("el número pid del proceso Hijo2 generado es %d\n", pid);
-		if (pid == -1)
-			perror("Fork error. Child not created. \n");
-		if(pid == 0)
-			start_child_2(fd, argv, pipex, envp);
-		else
-			close(fd[FD_READ_END]);
-	}
+		child_2_process(fd, pid, pipex, argv, envp);
 	waitpid(pid, NULL, 0);
 	freepointers(pipex);
 //	atexit(leaks);

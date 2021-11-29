@@ -1,2 +1,2 @@
-Entrando en el child 2Saliendo del proceso hijo2
+Outfile creada con fd = 6Saliendo del proceso hijo2
       14
