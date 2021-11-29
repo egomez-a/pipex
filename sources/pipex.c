@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 14:05:37 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 15:12:49 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	start_child_2(int *fd, char **argv, t_pipex pipex, char **envp)
 	printf("Entrando en el child 2\n");
 	close(fd[FD_WRITE_END]);
 	fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	printf("Outfile creada con fd = %d", fd_outfile);
+	printf("Outfile creada con fd = %d\n", fd_outfile);
 	if (fd_outfile < 0)
 		printf("Error creating or opening outfile\n");
 	dup2(fd[FD_READ_END], STDIN_FILENO);

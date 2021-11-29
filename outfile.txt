@@ -1,2 +1,3 @@
 Outfile creada con fd = 6Saliendo del proceso hijo2
-      14
+Saliendo del proceso hijo1
+       6
