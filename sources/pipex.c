@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/27 18:59:03 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 09:39:01 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	start_child_2(int *fd, char **argv, t_pipex *pipex, char **envp)
 int main(int argc, char **argv, char **envp)
 {
     int			fd[2];
+	int 		i;
 	pid_t		pid;
 	t_pipex		pipex;
 	int 		*check;
@@ -61,6 +62,14 @@ int main(int argc, char **argv, char **envp)
 	pipex.cmd1 = ft_split(argv[2], ' ');
 	pipex.cmd2 = ft_split(argv[3], ' ');
 	pipex.path = env_variable(envp);
+	printf("Command 1 es %s %s %s\n", pipex.cmd1[0], pipex.cmd1[1], pipex.cmd1[2]);
+	printf("Command 1 es %s %s\n", pipex.cmd2[0], pipex.cmd2[1]);
+	i = 0;
+	while (pipex.path[i])
+	{
+		printf("Paths %s %s %s %s %s %s\n", pipex.path[0], pipex.path[1], pipex.path[2], pipex.path[3], pipex.path[4], pipex.path[5]);
+		i++;
+	}
 	check = check_cmd_path(pipex);
 	if (check[0] == 0 || check[1] == 0)
 		printf("Error: not able to execute cmd");

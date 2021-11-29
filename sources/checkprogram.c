@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 18:47:37 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/27 18:52:05 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 09:43:56 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	*check_cmd_path(t_pipex pipex)
 		else
 			cmd[1] = ft_strjoin(pipex.path[i], pipex.cmd2[0]);
 		check_program(pipex, cmd, check);
+		if (check[0] == 1)
+			break;
 		i++;
 	}
 	return (check);
