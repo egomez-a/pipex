@@ -6,13 +6,20 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 11:55:07 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/29 13:38:36 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-void	start_child_1(int *fd, char **argv, t_pipex *pipex, char **envp)
+void	freepointers(t_pipex pipex)
+{
+	freematrix(pipex.cmd1);
+	freematrix(pipex.cmd2);
+	freematrix(pipex.path);
+}
+
+void	start_child_1(int *fd, char **argv, t_pipex pipex, char **envp)
 {	
 	int		fd_infile;
 
@@ -24,15 +31,16 @@ void	start_child_1(int *fd, char **argv, t_pipex *pipex, char **envp)
 	close(fd_infile);
 	dup2(fd[FD_WRITE_END], STDOUT_FILENO);
 	close(fd[FD_WRITE_END]);
-	if (execve(pipex->cmd1[0], pipex->cmd1, envp) == -1)
+	printf("Saliendo del proceso hijo1\n");
+	if (execve(pipex.cmd1[0], pipex.cmd1, envp) == -1)
 	{
 		perror("Could not execve cmd 1");
-		free(pipex);
+		freepointers(pipex);
 		exit(0);
 	}
 }
 
-void	start_child_2(int *fd, char **argv, t_pipex *pipex, char **envp)
+void	start_child_2(int *fd, char **argv, t_pipex pipex, char **envp)
 {
 	int		fd_outfile;
 	
@@ -42,10 +50,11 @@ void	start_child_2(int *fd, char **argv, t_pipex *pipex, char **envp)
 	dup2(fd[FD_READ_END], STDIN_FILENO);
 	close(fd[FD_READ_END]);
 	dup2(fd_outfile, STDOUT_FILENO);
-	if (execve(pipex->cmd2[0], pipex->cmd2, envp) == -1)
+	printf("Saliendo del proceso hijo2\n");
+	if (execve(pipex.cmd2[0], pipex.cmd2, envp) == -1)
 	{
     	perror("Could not execve cmd 2");
-		free(pipex);
+		freepointers(pipex);
 		exit(0);
 	}
 }
@@ -53,18 +62,17 @@ void	start_child_2(int *fd, char **argv, t_pipex *pipex, char **envp)
 int main(int argc, char **argv, char **envp)
 {
     int			fd[2];
-	int 		i;
 	pid_t		pid;
+	int 		i;
 	t_pipex		pipex;
 	int 		*check;
 	
 	check_entry(argc);
-	atexit(leaks);
 	pipex.cmd1 = ft_split(argv[2], ' ');
 	pipex.cmd2 = ft_split(argv[3], ' ');
 	pipex.path = env_variable(envp);
-	printf("Command 1 es %s %s\n", pipex.cmd1[0], pipex.cmd1[1]);
-	printf("Command 1 es %s %s\n", pipex.cmd2[0], pipex.cmd2[1]);
+	// printf("Command 1 es %s %s\n", pipex.cmd1[0], pipex.cmd1[1]);
+	// printf("Command 1 es %s %s\n", pipex.cmd2[0], pipex.cmd2[1]);
 	i = 0;
 	while (pipex.path[i])
 	{
@@ -75,27 +83,30 @@ int main(int argc, char **argv, char **envp)
 	if (check[0] == 0 || check[1] == 0)
 		printf("Error: not able to execute cmd");
 	pipe(fd);
+	printf("Acabo de iniciar el pipe\n");
 	if (pipe(fd) < 0)
 		perror("Pipe error. Pipe not created. \n");
 	pid = fork();
+	printf("el número pid del proceso Hijo1 generado es %d\n", pid);
 	if (pid == -1)
 		perror("Fork error. Child not created. \n");
 	if(pid == 0)
-		start_child_1(fd, argv, &pipex, envp);
+		start_child_1(fd, argv, pipex, envp);
 	else
 	{
+		printf("Voy a generar el segundo proceso\n");
 		close(fd[FD_WRITE_END]);
 		pid = fork();
+		printf("el número pid del proceso Hijo2 generado es %d\n", pid);
 		if (pid == -1)
 			perror("Fork error. Child not created. \n");
 		if(pid == 0)
-			start_child_2(fd, argv, &pipex, envp);
+			start_child_2(fd, argv, pipex, envp);
 		else
 			close(fd[FD_READ_END]);
 	}
 	waitpid(pid, NULL, 0);
-	freematrix(pipex.cmd1);
-	freematrix(pipex.cmd1);
-	freematrix(pipex.path);
+	freepointers(pipex);
+//	atexit(leaks);
 	return 0;
 }

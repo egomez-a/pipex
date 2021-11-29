@@ -1,1 +1,2 @@
-      11
+Entrando en el child 2Saliendo del proceso hijo2
+      14
