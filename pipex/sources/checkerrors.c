@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 09:59:29 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 14:53:27 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/30 16:55:15 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ void	check_entry(int argc)
 void	check_pid(pid_t pid)
 {
 	if (pid < 0)
-	{
-		perror("Fork error. Child not created");
-		exit (errno);
-	}
+		put_error("Fork error. Child not created");
 }
 
 void	check_commands(int *check)
@@ -35,15 +32,18 @@ void	check_commands(int *check)
 	if (check[0] == 0 || check[1] == 0)
 	{
 		perror("Command does not execute");
-		exit (errno);
+		exit(2);
 	}
 }
 
 void	check_pipe(int *fd)
 {
 	if (pipe(fd) < 0)
-	{
-		perror("Pipe error. Pipe not created");
-		exit (errno);
-	}
+		put_error("Pipe error. Pipe not created");
+}
+
+void	put_error(const char *error)
+{
+	perror(error);
+	exit (errno);
 }

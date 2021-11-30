@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 15:12:15 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/30 17:10:28 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@ void	start_child_1(int *fd, char **argv, t_pipex pipex, char **envp)
 {	
 	pipex.fd_in = open_infile(argv[1], pipex);
 	close(fd[FD_READ_END]);
-	dup2(pipex.fd_in, STDIN_FILENO);
+	if (dup2(pipex.fd_in, STDIN_FILENO) < 0)
+		put_error("Dup Error");
 	close(pipex.fd_in);
-	dup2(fd[FD_WRITE_END], STDOUT_FILENO);
+	if (dup2(fd[FD_WRITE_END], STDOUT_FILENO) < 0)
+		put_error("Dup Error");
 	close(fd[FD_WRITE_END]);
-	if (execve(pipex.cmd1[0], pipex.cmd1, envp) == -1)
+	if (execve(pipex.cmd1[0], pipex.cmd1, envp) < 0)
 	{
 		perror("Could not execve cmd 1");
 		exit (errno);
@@ -44,10 +46,12 @@ void	start_child_2(int *fd, pid_t pid, t_pipex pipex, char **envp)
 	check_pid(pid);
 	if (pid == 0)
 	{
-		dup2(fd[FD_READ_END], STDIN_FILENO);
+		if (dup2(fd[FD_READ_END], STDIN_FILENO) < 0)
+			put_error("Dup Error");
 		close(fd[FD_READ_END]);
-		dup2(pipex.fd_out, STDOUT_FILENO);
-		if (execve(pipex.cmd2[0], pipex.cmd2, envp) == -1)
+		if (dup2(pipex.fd_out, STDOUT_FILENO) < 0)
+			put_error("Dup Error");
+		if (execve(pipex.cmd2[0], pipex.cmd2, envp) < 0)
 		{
 			perror("Could not execve cmd 2");
 			exit (errno);
@@ -84,6 +88,6 @@ int	main(int argc, char **argv, char **envp)
 	wait(&status);
 	freepointers(pipex);
 	free(check);
-	//atexit(leaks);
+	atexit(leaks);
 	return (0);
 }

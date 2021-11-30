@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 15:19:46 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/30 16:38:10 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	check_program(t_pipex pipex, char **cmd, int *check);
 void	check_pid(pid_t pid);
 void	check_commands(int *check);
 void	check_pipe(int *fd);
+void	put_error(const char *error);
 
 /* Funciones path */
 char	**env_variable(char **envp);

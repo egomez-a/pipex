@@ -1,1 +1,9 @@
-      74
+total 56
+-rw-r--r--   1 egomez-a  2019   2548 30 nov 14:57 Makefile
+drwxr-xr-x   4 egomez-a  2019    136 29 nov 11:00 include
+-rw-r--r--   1 egomez-a  2019    395 29 nov 16:00 infile.txt
+drwxr-xr-x  22 egomez-a  2019    748 30 nov 17:17 obj
+-rw-r--r--   1 egomez-a  2019      0 30 nov 17:17 outfile.txt
+-rwxr-xr-x   1 egomez-a  2019  19204 30 nov 17:17 pipex
+drwxr-xr-x  14 egomez-a  2019    476 30 nov 13:39 pipex-tester
+drwxr-xr-x  23 egomez-a  2019    782 30 nov 14:39 sources
