@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 20:22:56 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/30 22:39:34 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ void	start_child_1(int *fd, char **argv, t_pipex pipex, char **envp)
 		put_error("Dup Error");
 	close(fd[FD_WRITE_END]);
 	if (execve(pipex.cmd1[0], pipex.cmd1, envp) < 0)
-	{
-		perror("Could not execve cmd 1");
-		exit (errno);
-	}
+		put_error("Could not execve cmd 1");
 }
 
 void	start_child_2(int *fd, pid_t pid, t_pipex pipex, char **envp)
@@ -46,19 +43,21 @@ void	start_child_2(int *fd, pid_t pid, t_pipex pipex, char **envp)
 	check_pid(pid);
 	if (pid == 0)
 	{
+		close(fd[FD_WRITE_END]);
 		if (dup2(fd[FD_READ_END], STDIN_FILENO) < 0)
 			put_error("Dup Error");
 		close(fd[FD_READ_END]);
 		if (dup2(pipex.fd_out, STDOUT_FILENO) < 0)
 			put_error("Dup Error");
+		close(pipex.fd_out);
 		if (execve(pipex.cmd2[0], pipex.cmd2, envp) < 0)
-		{
-			perror("Could not execve cmd 2");
-			exit (errno);
-		}
+			put_error("Could not execve cmd 2");
 	}
 	else
+	{
 		close(fd[FD_READ_END]);
+		close(fd[FD_WRITE_END]);
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
