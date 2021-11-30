@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:55:36 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 16:41:01 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/30 23:12:29 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,7 @@ char	**env_variable(char **envp)
 		perror ("Error - no env variable found\n");
 		exit (errno);
 	}
+	if (!paths)
+		put_error("No path found");
 	return (paths);
 }

@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 22:39:34 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/30 23:14:36 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 void	freepointers(t_pipex pipex)
 {
-	if (pipex.cmd1)
-		freematrix(pipex.cmd1);
-	if (pipex.cmd2)
-		freematrix(pipex.cmd2);
-	if (pipex.path)
-		freematrix(pipex.path);
+	freematrix(pipex.path);
 }
 
 void	start_child_1(int *fd, char **argv, t_pipex pipex, char **envp)
@@ -84,6 +79,6 @@ int	main(int argc, char **argv, char **envp)
 	}
 	wait(&status);
 	wait(&status);
-	freepointers(pipex);
+	//freepointers(pipex);
 	return (0);
 }
