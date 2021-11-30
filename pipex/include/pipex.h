@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 16:38:10 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/30 19:53:44 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,9 @@ typedef struct s_pipex
 char	**ft_split(const char *s, char c);
 void	*ft_calloc(size_t count, size_t size);
 size_t	ft_strlen(const char *str);
-size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 char	*ft_strchr(const char *s, int c);
 void	ft_putstr_fd(char *s, int fd);
-void	ft_putendl_fd(char *s, int fd);
-void	ft_putchar_fd(char c, int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlcat(char *dest, char *src, size_t size);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strnstr(const char *hst, const char *ndl, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
@@ -64,7 +60,7 @@ int		open_outfile(char *argv);
 
 /* Funciones check */
 void	check_entry(int argc);
-int		*check_cmd_path(t_pipex pipex);
+void	*check_cmd_path(t_pipex pipex);
 void	check_cmd_pathcmd1(t_pipex pipex, char **cmd, int i);
 void	check_cmd_pathcmd2(t_pipex pipex, char **cmd, int i);
 void	check_program(t_pipex pipex, char **cmd, int *check);

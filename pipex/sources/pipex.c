@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 17:10:28 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/30 20:22:56 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,12 @@ int	main(int argc, char **argv, char **envp)
 	pid_t		pid;
 	t_pipex		pipex;
 	int			status;
-	int			*check;
 
 	check_entry(argc);
 	pipex.cmd1 = ft_split(argv[2], ' ');
 	pipex.cmd2 = ft_split(argv[3], ' ');
 	pipex.path = env_variable(envp);
-	check = check_cmd_path(pipex);
+	check_cmd_path(pipex);
 	pipe(fd);
 	check_pipe(fd);
 	pid = fork();
@@ -87,7 +86,5 @@ int	main(int argc, char **argv, char **envp)
 	wait(&status);
 	wait(&status);
 	freepointers(pipex);
-	free(check);
-	atexit(leaks);
 	return (0);
 }
