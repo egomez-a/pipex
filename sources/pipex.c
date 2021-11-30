@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 20:03:47 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/30 10:19:15 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,22 @@ void	start_child_1(int *fd, char **argv, t_pipex pipex, char **envp)
 {	
 	int		fd_infile;
 
-	printf("Entrando en el child 1\n");
+	//printf("Entrando en el child 1\n");
 	fd_infile = open(argv[1], O_RDONLY);
-	printf("Abierto el infile con fd = %d\n", fd_infile);
+	// printf("Abierto el infile con fd = %d\n", fd_infile);
 	check_fd(fd_infile, argv[1]);
 	close(fd[FD_READ_END]);
 	dup2(fd_infile, STDIN_FILENO);
-	printf("El STDIN_FILENO es %d", STDIN_FILENO);
+	// printf("El STDIN_FILENO es %d\n", STDIN_FILENO);
 	close(fd_infile);
-	dup2(fd[FD_WRITE_END], STDOUT_FILENO);
-	printf("Saliendo del proceso hijo1\n");
+	// printf("Saliendo del proceso hijo1\n");
 	if (execve(pipex.cmd1[0], pipex.cmd1, envp) == -1)
 	{
 		perror("Could not execve cmd 1");
 		freepointers(pipex);
 		exit (errno);
 	}
+	dup2(fd[FD_WRITE_END], STDOUT_FILENO);
 	close(fd[FD_WRITE_END]);
 }
 
@@ -46,22 +46,20 @@ void	start_child_2(int *fd, char **argv, t_pipex pipex, char **envp)
 {
 	int		fd_outfile;
 
-	printf("Entrando en el child 2\n");
+	// printf("Entrando en el child 2\n");
 	fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	printf("Outfile creada con fd = %d\n", fd_outfile);
-	if (fd_outfile < 0)
-		printf("Error creating or opening outfile\n");
+	// printf("Creado el outfile con fd = %d\n", fd_outfile);
 	dup2(fd[FD_READ_END], STDIN_FILENO);
 	close(fd[FD_READ_END]);
-	dup2(fd_outfile, STDOUT_FILENO);
 	if (execve(pipex.cmd2[0], pipex.cmd2, envp) == -1)
 	{
 		perror("Could not execve cmd 2");
 		freepointers(pipex);
 		exit (errno);
 	}
-	close(fd[FD_READ_END]);
-	printf("Saliendo del proceso hijo2\n");
+	check_fdoutfile(fd_outfile, pipex);
+	dup2(fd_outfile, STDOUT_FILENO);
+	// printf("Saliendo del proceso hijo2\n");
 }
 
 void	child_2_process(int *fd, int pid, t_pipex pipex, char **argv, char **envp)
@@ -69,11 +67,7 @@ void	child_2_process(int *fd, int pid, t_pipex pipex, char **argv, char **envp)
 	printf("****Voy a generar el segundo proceso\n");
 	pid = fork();
 	printf("    el número pid del proceso Hijo2 generado es %d\n", pid);
-	if (pid < 0)
-	{
-		perror("Fork error. Child not created. \n");
-		exit (errno);
-	}
+	check_pid(pid, pipex);
 	if (pid == 0)
 		start_child_2(fd, argv, pipex, envp);
 	else
@@ -94,19 +88,10 @@ int	main(int argc, char **argv, char **envp)
 	check_entry(argc);
 	pipex.cmd1 = ft_split(argv[2], ' ');
 	pipex.cmd2 = ft_split(argv[3], ' ');
-	printf("Command 1 es %s %s\n", pipex.cmd1[0], pipex.cmd1[1]);
-	printf("Command 1 es %s %s\n", pipex.cmd2[0], pipex.cmd2[1]);
 	pipex.path = env_variable(envp);
 	check = check_cmd_path(pipex);
-	if (check[0] == 0 || check[1] == 0)
-	{
-		perror("Command does not execute");
-		exit (errno);
-	}
+	check_commands(check, pipex);
 	pipe(fd);
-	printf("Acabo de iniciar el pipe\n");
-	printf("     El fd del pipe de lectura es %d\n", fd[FD_READ_END]);
-	printf("     El fd del pipe de escritura es %d\n", fd[FD_WRITE_END]);
 	if (pipe(fd) < 0)
 	{
 		perror("Pipe error. Pipe not created");
@@ -115,16 +100,13 @@ int	main(int argc, char **argv, char **envp)
 	pid = fork();
 	printf("****He generado el primer proceso\n");
 	printf("    el número pid del proceso Hijo1 generado es %d\n", pid);
-	if (pid < 0)
-	{
-		perror("Fork error. Child not created");
-		exit (errno);
-	}
-	start_child_1(fd, argv, pipex, envp);
+	check_pid(pid, pipex);
+	if (pid == 0)
+		start_child_1(fd, argv, pipex, envp);
 	child_2_process(fd, pid, pipex, argv, envp);
 	wait(&status);
 	wait(&status);
 	freepointers(pipex);
-	atexit(leaks);
+	//atexit(leaks);
 	return (0);
 }

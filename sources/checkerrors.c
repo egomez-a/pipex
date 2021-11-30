@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 09:59:29 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 18:07:01 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/30 10:17:58 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,35 @@ void	check_fd(int fd, char *filename)
 		ft_putstr_fd("pipex: can't access file\n", 2);
 		ft_putendl_fd(filename, 2);
 		exit(1);	
+	}
+}
+
+void	check_pid(pid_t pid, t_pipex pipex)
+{
+	if (pid < 0)
+	{
+		perror("Fork error. Child not created");
+		freepointers(pipex);
+		exit (errno);
+	}
+}
+
+void	check_commands(int *check, t_pipex pipex)
+{
+	if (check[0] == 0 || check[1] == 0)
+	{
+		perror("Command does not execute");
+		freepointers(pipex);
+		exit (errno);
+	}
+}
+
+void	check_fdoutfile(int fd_outfile, t_pipex pipex)
+{
+	if (fd_outfile < 0)
+	{
+		perror("Error creating or opening outfile\n");
+		freepointers(pipex);
+		exit (errno);
 	}
 }

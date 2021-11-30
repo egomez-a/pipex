@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:55:36 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/29 18:12:36 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/30 10:21:11 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@ char	**add_slash(char **paths)
 		{	
 			first = ft_strtrim(paths[i], "PATH=");
 			aux[i] = ft_strjoin(first, "/");
-			printf("Path 0 final is %s\n", aux[i]);
+			// printf("Path 0 final is %s\n", aux[i]);
 		}
 		else
 		{
 			aux[i] = ft_strjoin(paths[i], "/");
-			printf("Path %d final is %s\n", i, aux[i]);
+			// printf("Path %d final is %s\n", i, aux[i]);
 		}
 		free(paths[i]);
 		i++;
 	}
-	free(paths);
+	free (paths);
 	return (aux);
 }
 
@@ -67,7 +67,7 @@ char	**env_variable(char **envp)
 //		printf("Pathline final en linea %d es %s\n", i, path_line);
 		if (!path_line)
 		{
-			perror("Error - no pathline in env\n");
+			perror ("Error - no pathline in env\n");
 			exit (errno);
 		}
 		paths = ft_split(path_line, ':');
@@ -75,7 +75,7 @@ char	**env_variable(char **envp)
 	}
 	else
 	{
-		perror("Error - no env variable found\n");
+		perror ("Error - no env variable found\n");
 		exit (errno);
 	}
 	return (paths);
