@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:55:36 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 13:09:00 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/30 15:05:37 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	**add_slash(char **paths)
 		{	
 			first = ft_strtrim(paths[i], "PATH=");
 			aux[i] = ft_strjoin(first, "/");
+			free(first);
 		}
 		else
 			aux[i] = ft_strjoin(paths[i], "/");
@@ -53,7 +54,7 @@ char	**env_variable(char **envp)
 	int		i;
 	char	*path_line;
 	char	**paths;
-	char	**aux;
+	char	**p;
 
 	i = 0;
 	if (envp)
@@ -66,8 +67,8 @@ char	**env_variable(char **envp)
 			i++;
 		}
 		check_error_path(path_line);
-		aux = ft_split(path_line, ':');
-		paths = add_slash(aux);
+		p = ft_split(path_line, ':');
+		paths = add_slash(p);
 	}
 	else
 	{

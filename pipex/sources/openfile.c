@@ -1,49 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checkerrors.c                                      :+:      :+:    :+:   */
+/*   openfile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 09:59:29 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 14:53:27 by egomez-a         ###   ########.fr       */
+/*   Created: 2021/11/30 14:37:16 by egomez-a          #+#    #+#             */
+/*   Updated: 2021/11/30 15:10:09 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	check_entry(int argc)
+int	open_infile(char *argv, t_pipex pipex)
 {
-	if (argc != 5)
-	{
-		perror("Error. Please include infile comand1 comand2 outfile\n");
-		exit (1);
-	}
-}
+	int	fd;
 
-void	check_pid(pid_t pid)
-{
-	if (pid < 0)
+	fd = open(argv, O_RDONLY);
+	if (fd == -1)
 	{
-		perror("Fork error. Child not created");
+		perror ("No infile existing");
+		freepointers(pipex);
 		exit (errno);
 	}
-}
-
-void	check_commands(int *check)
-{
-	if (check[0] == 0 || check[1] == 0)
+	else if (fd == -2)
 	{
-		perror("Command does not execute");
+		perror ("Can't access file");
+		freepointers(pipex);
 		exit (errno);
 	}
+	return (fd);
 }
 
-void	check_pipe(int *fd)
+int	open_outfile(char *argv)
 {
-	if (pipe(fd) < 0)
+	int	fd;
+
+	fd = open(argv, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd < 0)
 	{
-		perror("Pipe error. Pipe not created");
+		perror ("Error creating or opening outfile\n");
 		exit (errno);
 	}
+	return (fd);
 }

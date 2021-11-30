@@ -6,7 +6,7 @@
 #    By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/10 14:37:38 by egomez-a          #+#    #+#              #
-#    Updated: 2021/11/30 12:13:04 by egomez-a         ###   ########.fr        #
+#    Updated: 2021/11/30 14:57:25 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS 		=	pipex.c \
 				paths.c \
 				checkprogram.c \
 				checkerrors.c \
+				openfile.c \
 				ft_calloc.c \
 				ft_putendl_fd.c \
 				ft_putstr_fd.c \

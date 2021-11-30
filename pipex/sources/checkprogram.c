@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 18:47:37 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 13:33:02 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/30 15:23:27 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ void	check_cmd_pathcmd1(t_pipex pipex, char **cmd, int i)
 		cmd[0] = ft_strjoin(pipex.path[i], pipex.cmd1[0]);
 }
 
+void	check_cmd_pathcmd2(t_pipex pipex, char **cmd, int i)
+{
+	if (pipex.cmd2[0][0] == '/')
+		cmd[1] = ft_strdup(pipex.cmd2[0]);
+	else
+		cmd[1] = ft_strjoin(pipex.path[i], pipex.cmd2[0]);
+}
+
 int	*check_cmd_path(t_pipex pipex)
 {
 	int		i;
@@ -49,14 +57,10 @@ int	*check_cmd_path(t_pipex pipex)
 		if (check[0] == 0)
 			check_cmd_pathcmd1(pipex, cmd, i);
 		if (check[1] == 0)
-		{
-			if (pipex.cmd2[0][0] == '/')
-				cmd[1] = ft_strdup(pipex.cmd2[0]);
-			else
-				cmd[1] = ft_strjoin(pipex.path[i], pipex.cmd2[0]);
-		}
+			check_cmd_pathcmd2(pipex, cmd, i);
 		check_program(pipex, cmd, check);
 		i++;
 	}
+	check_commands(check);
 	return (check);
 }

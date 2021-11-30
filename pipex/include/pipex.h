@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 14:05:03 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/30 15:19:46 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int		main(int argc, char **argv, char **envp);
 void	start_child_1(int *fd, char **argv, t_pipex pipex, char **envp);
 void	start_child_2(int *fd, pid_t pid, t_pipex pipex, char **envp);
 void	freepointers(t_pipex pipex);
+
+/* Funciones open file */
 int		open_infile(char *argv, t_pipex pipex);
 int		open_outfile(char *argv);
 
@@ -64,9 +66,11 @@ int		open_outfile(char *argv);
 void	check_entry(int argc);
 int		*check_cmd_path(t_pipex pipex);
 void	check_cmd_pathcmd1(t_pipex pipex, char **cmd, int i);
+void	check_cmd_pathcmd2(t_pipex pipex, char **cmd, int i);
 void	check_program(t_pipex pipex, char **cmd, int *check);
 void	check_pid(pid_t pid);
 void	check_commands(int *check);
+void	check_pipe(int *fd);
 
 /* Funciones path */
 char	**env_variable(char **envp);

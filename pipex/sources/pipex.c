@@ -6,44 +6,11 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 14:05:24 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/11/30 15:12:15 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-int	open_infile(char *argv, t_pipex pipex)
-{
-	int	fd;
-	
-	fd = open(argv, O_RDONLY);
-	if (fd == -1)
-	{
-		perror("No infile existing");
-		freepointers(pipex);
-		exit (errno);
-	}
-	else if (fd == -2)
-	{
-		perror ("Can't access file");
-		freepointers(pipex);
-		exit (errno);
-	}
-	return (fd);
-}
-
-int	open_outfile(char *argv)
-{
-	int	fd;
-	
-	fd = open(argv, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd < 0)
-	{
-		perror("Error creating or opening outfile\n");
-		exit (errno);
-	}
-	return (fd);
-}
 
 void	freepointers(t_pipex pipex)
 {
@@ -87,9 +54,7 @@ void	start_child_2(int *fd, pid_t pid, t_pipex pipex, char **envp)
 		}
 	}
 	else
-	{
 		close(fd[FD_READ_END]);
-	}
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -98,20 +63,15 @@ int	main(int argc, char **argv, char **envp)
 	pid_t		pid;
 	t_pipex		pipex;
 	int			status;
-	int	*check;
-	
+	int			*check;
+
 	check_entry(argc);
 	pipex.cmd1 = ft_split(argv[2], ' ');
 	pipex.cmd2 = ft_split(argv[3], ' ');
 	pipex.path = env_variable(envp);
 	check = check_cmd_path(pipex);
-	check_commands(check);
 	pipe(fd);
-	if (pipe(fd) < 0)
-	{
-		perror("Pipe error. Pipe not created");
-		exit (errno);
-	}
+	check_pipe(fd);
 	pid = fork();
 	if (pid == 0)
 		start_child_1(fd, argv, pipex, envp);
@@ -123,5 +83,7 @@ int	main(int argc, char **argv, char **envp)
 	wait(&status);
 	wait(&status);
 	freepointers(pipex);
+	free(check);
+	//atexit(leaks);
 	return (0);
 }
