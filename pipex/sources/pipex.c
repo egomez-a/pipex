@@ -6,20 +6,15 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 23:14:36 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/12/01 19:12:52 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	freepointers(t_pipex pipex)
-{
-	freematrix(pipex.path);
-}
-
 void	start_child_1(int *fd, char **argv, t_pipex pipex, char **envp)
 {	
-	pipex.fd_in = open_infile(argv[1], pipex);
+	pipex.fd_in = open_infile(argv[1]);
 	close(fd[FD_READ_END]);
 	if (dup2(pipex.fd_in, STDIN_FILENO) < 0)
 		put_error("Dup Error");
@@ -57,16 +52,17 @@ void	start_child_2(int *fd, pid_t pid, t_pipex pipex, char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
+	t_pipex		pipex;
 	int			fd[2];
 	pid_t		pid;
-	t_pipex		pipex;
 	int			status;
 
 	check_entry(argc);
 	pipex.cmd1 = ft_split(argv[2], ' ');
 	pipex.cmd2 = ft_split(argv[3], ' ');
 	pipex.path = env_variable(envp);
-	check_cmd_path(pipex);
+	pipex.len = path_lenght(pipex);
+	check_cmd_path(&pipex);
 	pipe(fd);
 	check_pipe(fd);
 	pid = fork();
@@ -79,6 +75,5 @@ int	main(int argc, char **argv, char **envp)
 	}
 	wait(&status);
 	wait(&status);
-	//freepointers(pipex);
 	return (0);
 }

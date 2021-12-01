@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 19:53:44 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/12/01 19:21:20 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_pipex
 	char	**cmd1;
 	char	**cmd2;
 	char	**path;
+	int		len;
 }			t_pipex;
 
 /* Funciones útiles */
@@ -52,18 +53,16 @@ void	freematrix(char **split);
 int		main(int argc, char **argv, char **envp);
 void	start_child_1(int *fd, char **argv, t_pipex pipex, char **envp);
 void	start_child_2(int *fd, pid_t pid, t_pipex pipex, char **envp);
-void	freepointers(t_pipex pipex);
 
 /* Funciones open file */
-int		open_infile(char *argv, t_pipex pipex);
+int		open_infile(char *argv);
 int		open_outfile(char *argv);
 
 /* Funciones check */
 void	check_entry(int argc);
-void	*check_cmd_path(t_pipex pipex);
-void	check_cmd_pathcmd1(t_pipex pipex, char **cmd, int i);
-void	check_cmd_pathcmd2(t_pipex pipex, char **cmd, int i);
-void	check_program(t_pipex pipex, char **cmd, int *check);
+void	*check_cmd_path(t_pipex *pipex);
+void	check_cmd_pathcmd1(t_pipex *pipex, char **cmd, int i, int *check);
+void	check_cmd_pathcmd2(t_pipex *pipex, char **cmd, int i, int *check);
 void	check_pid(pid_t pid);
 void	check_commands(int *check);
 void	check_pipe(int *fd);
@@ -73,4 +72,5 @@ void	put_error(const char *error);
 char	**env_variable(char **envp);
 char	**add_slash(char **paths);
 void	check_error_path(char *path_line);
+int		path_lenght(t_pipex pipex);
 #endif

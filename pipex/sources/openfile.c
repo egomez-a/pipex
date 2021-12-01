@@ -6,13 +6,13 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:16 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 15:10:09 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/12/01 12:11:10 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	open_infile(char *argv, t_pipex pipex)
+int	open_infile(char *argv)
 {
 	int	fd;
 
@@ -20,13 +20,11 @@ int	open_infile(char *argv, t_pipex pipex)
 	if (fd == -1)
 	{
 		perror ("No infile existing");
-		freepointers(pipex);
 		exit (errno);
 	}
 	else if (fd == -2)
 	{
 		perror ("Can't access file");
-		freepointers(pipex);
 		exit (errno);
 	}
 	return (fd);

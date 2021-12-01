@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 09:59:29 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 22:53:11 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/12/01 09:10:41 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	check_commands(int *check)
 {
 	if (check[0] == 0 || check[1] == 0)
 	{
-		perror("Command does not execute");
+		perror("command not found");
 		exit(2);
 	}
 }

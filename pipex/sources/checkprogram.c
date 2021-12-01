@@ -6,51 +6,41 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 18:47:37 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 22:44:15 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/12/01 19:23:37 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	check_program(t_pipex pipex, char **cmd, int *check)
+void	check_cmd_pathcmd1(t_pipex *pipex, char **cmd, int i, int *check)
 {
-	if (access(cmd[0], X_OK) == 0 && check[0] == 0)
+	if (pipex->cmd1[0][0] == '/')
+		cmd[0] = ft_strdup(pipex->cmd1[0]);
+	else
+		cmd[0] = ft_strjoin(pipex->path[i], pipex->cmd1[0]);
+	if (access(cmd[0], X_OK) == 0)
 	{
-		free(pipex.cmd1[0]);
-		pipex.cmd1[0] = ft_strdup(cmd[0]);
+		free(pipex->cmd1[0]);
+		pipex->cmd1[0] = ft_strdup(cmd[0]);
 		check[0] = 1;
-		free(cmd[0]);
 	}
+}
+
+void	check_cmd_pathcmd2(t_pipex *pipex, char **cmd, int i, int *check)
+{
+	if (pipex->cmd2[0][0] == '/')
+		cmd[1] = ft_strdup(pipex->cmd2[0]);
 	else
-		free(cmd[0]);
-	if (access(cmd[1], X_OK) == 0 && check[1] == 0)
+		cmd[1] = ft_strjoin(pipex->path[i], pipex->cmd2[0]);
+	if (access(cmd[1], X_OK) == 0)
 	{
-		free(pipex.cmd2[0]);
-		pipex.cmd2[0] = ft_strdup(cmd[1]);
+		free(pipex->cmd2[0]);
+		pipex->cmd2[0] = ft_strdup(cmd[1]);
 		check[1] = 1;
-		free(cmd[1]);
 	}
-	else
-		free(cmd[1]);
 }
 
-void	check_cmd_pathcmd1(t_pipex pipex, char **cmd, int i)
-{
-	if (pipex.cmd1[0][0] == '/')
-		cmd[0] = ft_strdup(pipex.cmd1[0]);
-	else
-		cmd[0] = ft_strjoin(pipex.path[i], pipex.cmd1[0]);
-}
-
-void	check_cmd_pathcmd2(t_pipex pipex, char **cmd, int i)
-{
-	if (pipex.cmd2[0][0] == '/')
-		cmd[1] = ft_strdup(pipex.cmd2[0]);
-	else
-		cmd[1] = ft_strjoin(pipex.path[i], pipex.cmd2[0]);
-}
-
-void	*check_cmd_path(t_pipex pipex)
+void	*check_cmd_path(t_pipex *pipex)
 {
 	int		i;
 	char	*cmd[2];
@@ -58,18 +48,22 @@ void	*check_cmd_path(t_pipex pipex)
 
 	i = 0;
 	check = (int *)calloc(2, sizeof(int));
-	while (pipex.path[i])
+	while (i < pipex->len - 1)
 	{
-		cmd[0] = NULL;
-		cmd[1] = NULL;
 		if (check[0] == 0)
-			check_cmd_pathcmd1(pipex, cmd, i);
+			check_cmd_pathcmd1(pipex, cmd, i, check);
 		if (check[1] == 0)
-			check_cmd_pathcmd2(pipex, cmd, i);
-		check_program(pipex, cmd, check);
+			check_cmd_pathcmd2(pipex, cmd, i, check);
 		i++;
 	}
-	check_commands(check);
-	free(check);
+	if (check[0] == 0 || check[1] == 0)
+	{
+		perror("command not found");
+		exit(2);
+	}
+	// freematrix(pipex->path);
+	// free(cmd[0]);
+	// free(cmd[1]);
+	// free(check);
 	return (0);
 }

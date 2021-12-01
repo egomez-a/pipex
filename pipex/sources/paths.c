@@ -6,11 +6,21 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:55:36 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/11/30 23:12:29 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/12/01 19:08:00 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+int		path_lenght(t_pipex pipex)
+{
+	int		i;
+
+	i = 0;
+	while (pipex.path[i])
+		i++;
+	return (i);
+}
 
 char	**add_slash(char **paths)
 {
