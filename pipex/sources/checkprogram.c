@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 18:47:37 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/12/01 19:23:37 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/12/01 20:24:33 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	check_cmd_pathcmd1(t_pipex *pipex, char **cmd, int i, int *check)
 		free(pipex->cmd1[0]);
 		pipex->cmd1[0] = ft_strdup(cmd[0]);
 		check[0] = 1;
+		printf("cmd1 es %s", pipex->cmd1[0]);
+		free(cmd[0]);
 	}
 }
 
@@ -37,6 +39,8 @@ void	check_cmd_pathcmd2(t_pipex *pipex, char **cmd, int i, int *check)
 		free(pipex->cmd2[0]);
 		pipex->cmd2[0] = ft_strdup(cmd[1]);
 		check[1] = 1;
+		printf("cmd2 es %s", pipex->cmd2[0]);
+		free(cmd[1]);
 	}
 }
 
@@ -48,7 +52,7 @@ void	*check_cmd_path(t_pipex *pipex)
 
 	i = 0;
 	check = (int *)calloc(2, sizeof(int));
-	while (i < pipex->len - 1)
+	while (i < pipex->len)
 	{
 		if (check[0] == 0)
 			check_cmd_pathcmd1(pipex, cmd, i, check);
@@ -59,11 +63,8 @@ void	*check_cmd_path(t_pipex *pipex)
 	if (check[0] == 0 || check[1] == 0)
 	{
 		perror("command not found");
-		exit(2);
+		exit(errno);
 	}
-	// freematrix(pipex->path);
-	// free(cmd[0]);
-	// free(cmd[1]);
-	// free(check);
+	free(check);
 	return (0);
 }

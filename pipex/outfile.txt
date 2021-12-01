@@ -2,8 +2,8 @@ total 120
 -rw-r--r--   1 egat  staff   2467 30 nov 19:17 Makefile
 drwxr-xr-x   4 egat  staff    128 30 nov 19:16 include
 -rw-r--r--   1 egat  staff    395 30 nov 19:16 infile.txt
-drwxr-xr-x  18 egat  staff    576  1 dic 19:22 obj
--rw-r--r--   1 egat  staff      0  1 dic 19:23 outfile.txt
--rwxr-xr-x   1 egat  staff  51656  1 dic 19:22 pipex
+drwxr-xr-x  18 egat  staff    576  1 dic 20:25 obj
+-rw-r--r--   1 egat  staff      0  1 dic 20:25 outfile.txt
+-rwxr-xr-x   1 egat  staff  51656  1 dic 20:25 pipex
 drwxr-xr-x  13 egat  staff    416 30 nov 19:18 pipex-tester
 drwxr-xr-x  20 egat  staff    640 30 nov 22:48 sources

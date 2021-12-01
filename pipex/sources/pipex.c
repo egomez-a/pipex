@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/12/01 19:12:52 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/12/01 20:25:31 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void	start_child_1(int *fd, char **argv, t_pipex pipex, char **envp)
 		put_error("Dup Error");
 	close(fd[FD_WRITE_END]);
 	if (execve(pipex.cmd1[0], pipex.cmd1, envp) < 0)
-		put_error("Could not execve cmd 1");
+	{
+		perror("Could not execve cmd 1");
+		exit (127);
+	}
 }
 
 void	start_child_2(int *fd, pid_t pid, t_pipex pipex, char **envp)
