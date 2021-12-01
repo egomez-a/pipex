@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 18:47:37 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/12/01 20:24:33 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/12/01 23:27:54 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	check_cmd_pathcmd1(t_pipex *pipex, char **cmd, int i, int *check)
 		cmd[0] = ft_strdup(pipex->cmd1[0]);
 	else
 		cmd[0] = ft_strjoin(pipex->path[i], pipex->cmd1[0]);
-	if (access(cmd[0], X_OK) == 0)
+	if (access(cmd[0], F_OK) == 0)
 	{
 		free(pipex->cmd1[0]);
 		pipex->cmd1[0] = ft_strdup(cmd[0]);
@@ -34,7 +34,7 @@ void	check_cmd_pathcmd2(t_pipex *pipex, char **cmd, int i, int *check)
 		cmd[1] = ft_strdup(pipex->cmd2[0]);
 	else
 		cmd[1] = ft_strjoin(pipex->path[i], pipex->cmd2[0]);
-	if (access(cmd[1], X_OK) == 0)
+	if (access(cmd[1], F_OK) == 0)
 	{
 		free(pipex->cmd2[0]);
 		pipex->cmd2[0] = ft_strdup(cmd[1]);

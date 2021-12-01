@@ -6,7 +6,7 @@
 #    By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/10 14:37:38 by egomez-a          #+#    #+#              #
-#    Updated: 2021/11/30 19:17:25 by egomez-a         ###   ########.fr        #
+#    Updated: 2021/12/01 23:14:27 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,11 +53,11 @@ all: $(NAME)
 
 $(OBJ_DIR)%.o : $(SRCS_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) -c $(CFLAGS) $(LFLAGS) $< -o $@
+	@$(CC) -c $(CFLAGS) $(LFLAGS) $< -o $@
 
 $(NAME) : $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
-	@echo $(BLUE) "======== COMPILED  ==========" $(NONE)
+	@echo $(GREEN) "======== COMPILED  ==========" $(NONE)
 
 clean:
 		@echo $(YELLOW) "========== CLEAN ==========" $(NONE)
@@ -73,7 +73,7 @@ fclean: clean
 re: fclean all
 
 git: fclean
-	@echo $(PURPLE) "===== PUSHING to GITHUB ===="  $(NONE)
+	@echo $(BLUE) "===== PUSHING to GITHUB ===="  $(NONE)
 	git add .
 	git commit -m "Pipex - $(NOW)"
 	git push origin master
