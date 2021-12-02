@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:55:36 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/12/02 10:47:06 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/12/02 11:42:15 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**add_slash(char **paths)
 		i++;
 	}
 	aux[i] = NULL;
-	free (paths);
+	free(paths);
 	return (aux);
 }
 
