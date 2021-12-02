@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/12/02 10:39:50 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/12/02 13:08:14 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	freematrix(char **split);
 int		main(int argc, char **argv, char **envp);
 void	start_child_1(int *fd, char **argv, t_pipex pipex, char **envp);
 void	start_child_2(int *fd, pid_t pid, t_pipex pipex, char **envp);
+void	free_pointers(t_pipex pipex);
 
 /* Funciones open file */
 int		open_infile(char *argv);

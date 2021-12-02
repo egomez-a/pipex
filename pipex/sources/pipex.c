@@ -6,11 +6,18 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/12/02 12:34:38 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/12/02 13:09:25 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	free_pointers(t_pipex pipex)
+{
+	freematrix(pipex.path);
+	freematrix(pipex.cmd1);
+	freematrix(pipex.cmd2);
+}
 
 void	start_child_1(int *fd, char **argv, t_pipex pipex, char **envp)
 {	
@@ -77,9 +84,5 @@ int	main(int argc, char **argv, char **envp)
 	}
 	wait(&status);
 	wait(&status);
-	freematrix(pipex.path);
-	freematrix(pipex.cmd1);
-	freematrix(pipex.cmd2);
-	atexit(leaks);
 	return (0);
 }

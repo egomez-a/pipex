@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 18:47:37 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/12/02 12:41:37 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/12/02 13:05:31 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	check_cmd_pathcmd1(t_pipex *pipex, char **cmd, int i, int *check)
 {
+	if (cmd[0])
+		free(cmd[0]);
 	if (pipex->cmd1[0][0] == '/')
 		cmd[0] = ft_strdup(pipex->cmd1[0]);
 	else
@@ -29,6 +31,8 @@ void	check_cmd_pathcmd1(t_pipex *pipex, char **cmd, int i, int *check)
 
 void	check_cmd_pathcmd2(t_pipex *pipex, char **cmd, int i, int *check)
 {
+	if (cmd[1])
+		free(cmd[1]);
 	if (pipex->cmd2[0][0] == '/')
 		cmd[1] = ft_strdup(pipex->cmd2[0]);
 	else

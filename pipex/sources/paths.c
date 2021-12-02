@@ -6,13 +6,13 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:55:36 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/12/02 11:42:15 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/12/02 13:07:17 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int		path_lenght(t_pipex *pipex)
+int	path_lenght(t_pipex *pipex)
 {
 	int		i;
 
