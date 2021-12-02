@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/12/02 10:39:19 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/12/02 11:01:03 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	start_child_1(int *fd, char **argv, t_pipex pipex, char **envp)
 		put_error("Dup Error");
 	close(fd[FD_WRITE_END]);
 	execve(pipex.cmd1[0], pipex.cmd1, envp);
-	perror("command not found\n");
+	perror("command not found");
 	exit(127);
 }
 
@@ -42,7 +42,7 @@ void	start_child_2(int *fd, pid_t pid, t_pipex pipex, char **envp)
 			put_error("Dup Error");
 		close(pipex.fd_out);
 		execve(pipex.cmd2[0], pipex.cmd2, envp);
-		perror("command not found\n");
+		perror("command not found");
 		exit(127);
 	}
 	else
