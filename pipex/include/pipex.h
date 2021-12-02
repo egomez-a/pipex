@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:03:40 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/12/01 19:21:20 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/12/02 10:39:50 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,5 @@ void	put_error(const char *error);
 char	**env_variable(char **envp);
 char	**add_slash(char **paths);
 void	check_error_path(char *path_line);
-int		path_lenght(t_pipex pipex);
+int		path_lenght(t_pipex *pipex);
 #endif

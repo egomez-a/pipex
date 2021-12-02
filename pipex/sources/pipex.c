@@ -6,7 +6,7 @@
 /*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:42:20 by egomez-a          #+#    #+#             */
-/*   Updated: 2021/12/01 23:26:21 by egomez-a         ###   ########.fr       */
+/*   Updated: 2021/12/02 10:39:19 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	main(int argc, char **argv, char **envp)
 	pipex.cmd1 = ft_split(argv[2], ' ');
 	pipex.cmd2 = ft_split(argv[3], ' ');
 	pipex.path = env_variable(envp);
-	pipex.len = path_lenght(pipex);
+	pipex.len = path_lenght(&pipex);
 	check_cmd_path(&pipex);
 	pipe(fd);
 	check_pipe(fd);

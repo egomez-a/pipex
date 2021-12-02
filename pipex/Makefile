@@ -6,7 +6,7 @@
 #    By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/10 14:37:38 by egomez-a          #+#    #+#              #
-#    Updated: 2021/12/01 23:14:27 by egomez-a         ###   ########.fr        #
+#    Updated: 2021/12/02 10:33:35 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,10 +53,10 @@ all: $(NAME)
 
 $(OBJ_DIR)%.o : $(SRCS_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	@$(CC) -c $(CFLAGS) $(LFLAGS) $< -o $@
+	@$(CC) -c $(CFLAGS) $(DEBUGGING) $(LFLAGS) $< -o $@
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) $(DEBUGGING) -o $(NAME) $(OBJS)
 	@echo $(GREEN) "======== COMPILED  ==========" $(NONE)
 
 clean:
